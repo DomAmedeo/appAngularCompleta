@@ -52,7 +52,7 @@ export class ModificaShippers {
       {
         if(ris){
           alert("modifivca effettuata con successo");
-          this.router.navigateByUrl("shippers/elenca")
+          this.router.navigateByUrl("shippers/ricerca/"+this.id)
         }
         else{
           alert("ERROEW")
