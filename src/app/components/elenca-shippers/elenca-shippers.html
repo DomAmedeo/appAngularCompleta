@@ -1,0 +1,20 @@
+<table class="table table-striped">
+    <thead>
+        <th>
+            Spedizione id
+        </th>
+        <th>
+            Nome Societa
+        </th>
+        <th>
+            Telefono
+        </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of elenco">
+        <td>{{s.shipperId}}</td>
+        <td>{{s.companyName}}</td>
+        <td>{{s.phone}}</td>
+        </tr>
+    </tbody>
+</table>

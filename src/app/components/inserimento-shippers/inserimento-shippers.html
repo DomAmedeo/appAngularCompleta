@@ -1,0 +1,12 @@
+<h1>Inserisci evento</h1>
+
+<div class="form-group">
+    <label for="nome">Nome</label>
+    <input type="text" class="form-control" [(ngModel)]="nome" id="nome">
+</div>
+<div class="form-group">
+    <label for="telefono">Telefono</label>
+    <input type="text" class="form-control" [(ngModel)]="telefono" id="telefono">
+</div>
+
+<button class="btr btn-primary mt-2" (click)="salva()">salva</button>
