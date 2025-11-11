@@ -7,11 +7,28 @@ import { Data } from '../classes/data';
 })
 export class ShipperService {
 
+  // // verifichiamo che l'oggetto restituito dall'api sia compatibile con il model che io a disposizione  
+  // private isShipper(obj: any): obj is Shippers{
+  //   if(typeof obj !== 'object' || obj === null) return false;
+    
+  //   return(
+  //     (typeof obj.shipperId === 'number') &&
+  //     (typeof obj.companyName === 'string')&&
+  //     (typeof obj.phone === 'string')      
+  //   );  
+  // }
+
+  // facciamo il controllo
   async Elenca(): Promise<Shippers[]>{
     try{
       const risultato : Data = await(await fetch('https://northwind-api.miloudi.dev/v1/shippers?page=1&pageSize=100')).json();
-      if(Array.isArray(risultato.data))
-      return risultato.data
+      if(Array.isArray(risultato.data)){
+        // if(risultato.data.every(e => this.isShipper(e)))
+        return risultato.data
+        // else console.log("dati non valisi")
+      }
+      else
+        console.log("DATI NON VALIDI")
     }
     catch(error){
       console.log("ERRORE" + error)
@@ -21,12 +38,12 @@ export class ShipperService {
 
   async salvaShippers(ship: Shippers): Promise<boolean>{
     try{
-      let risultato : Data = await (await fetch('https://northwind-api.miloudi.dev/v1/shippers',
+      const risultato : Data = await (await fetch('https://northwind-api.miloudi.dev/v1/shippers',
       {
         headers:{"Content-Type": "application/json"},
         method:'Post',
         body: JSON.stringify(ship)
-      })).json();
+      })).json(); 
       return true 
       }catch(error){
       console.log("ERRORE"+error)
@@ -34,4 +51,45 @@ export class ShipperService {
     return false
   }
   
+  async detteaglio(codice: number): Promise<Shippers | null>{
+    try{
+      const response = await fetch("https://northwind-api.miloudi.dev/v1/shippers/"+ codice);
+      if (!response.ok){
+        return null;
+      }
+      const risultato : Shippers = await response.json();
+      console.log("RISULTATO RICEVUTO ", risultato)
+      return risultato
+    }catch(errore){
+      console.log(errore)
+    }
+    return null
+  }
+  
+
+  async Modifica(ship: Shippers): Promise<boolean>{
+    try{
+    
+      const response= await fetch('https://northwind-api.miloudi.dev/v1/shippers/'+ ship.shipperId  , {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "Application/json"
+        },
+        body: JSON.stringify(ship)
+      })
+
+      if(!response.ok){
+        console.log("errore HTTP")
+        return false;
+      }
+      const risultato : Shippers = await response.json();
+      console.log("RISULTATO RICEVUTO ", risultato)
+      return true
+    }
+    catch(errore){
+      console.log(errore)
+    }
+    return false
+
+  }
 }

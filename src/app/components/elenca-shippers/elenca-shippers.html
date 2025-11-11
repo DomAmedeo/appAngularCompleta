@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let s of elenco">
-        <td>{{s.shipperId}}</td>
+        <td><a href="/shippers/ricerca/{{s.shipperId }}">{{s.shipperId}}</a></td>
         <td>{{s.companyName}}</td>
         <td>{{s.phone}}</td>
         </tr>
