@@ -32,7 +32,10 @@ export class ModificaShippers {
         this.id= ship.shipperId;
         this.nome = ship.companyName;
         this.tel = ship.phone;
+        console.log(this.id)
+
         }
+
 
       }
       })
@@ -49,10 +52,9 @@ export class ModificaShippers {
       {
         if(ris){
           alert("modifivca effettuata con successo");
-          this.router.navigateByUrl("shippers/modifica/"+this.id)
+          this.router.navigateByUrl("shippers/elenca")
         }
         else{
-          console.log(ris)
           alert("ERROEW")
         }
       })

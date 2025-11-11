@@ -67,13 +67,14 @@ export class ShipperService {
   }
   
 
-  async Modifica(ship: Shippers): Promise<boolean>{
+  async Modifica( ship: Shippers): Promise<boolean>{
     try{
+      const varcodice = ship.shipperId;
     
-      const response= await fetch('https://northwind-api.miloudi.dev/v1/shippers/'+ ship.shipperId  , {
+      const response= await fetch('https://northwind-api.miloudi.dev/v1/shippers/'+ ship.shipperId , {
         method: "PATCH",
         headers: {
-          "Content-Type": "Application/json"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(ship)
       })
